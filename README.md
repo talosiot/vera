@@ -3,6 +3,7 @@
 Vera Atkins was a great WWII spy.
 
 ## Installation
+These scripts depend on the github and aws cli.
 `./install_requirements`
 
 ## Naming conventions
@@ -12,15 +13,12 @@ user@github.com/token
 e.g. talosiot-will@github.com/token
 
 ### Github deploy keys
-git@github.com/(user or org)/(library).git
+The naming convention is `git@github.com/$owner/$repo.git`.  For example `git@github.com/talosiot/hera.git`.
 
-To see your github deploy keys on github
-```bash
-gh api repos/:owner/:repo/keys
-```
-in the repository.
+To see your github deploy keys on github `gh api repos/:owner/:repo/keys` in the repository. 
+Then `gh api repos/:owner/:repo/keys/<keyID> --method DELETE`
 
-And delete it in aws
+And to delete it in aws
 ```bash
 aws secretsmanager list-secrets
 aws secretsmanager delete-secret --secret-id git@github.com/...
@@ -28,5 +26,4 @@ aws secretsmanager delete-secret --secret-id git@github.com/...
 
 ### Grafana api keys
 
-grafana/$url/org/$org_id
-e.g. grafana/dashboard.talosiot.com/org/12
+The naming convention is `grafana/$url/org/$org_id` for example `grafana/dashboard.talosiot.com/org/12`.  
