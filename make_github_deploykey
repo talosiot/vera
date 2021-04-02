@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+keyname="__new_deploykey"
+
+remote_name=$(git remote get-url origin) || exit 1
+#aws secret names cant have colon
+secret_name=$(echo "$remote_name" | sed 's/:/\//g')
+
+vera_check() {
+    echo "Must add vera to path"
+    exit 1
+}
+
+which create_secret || vera_check
+
+#make a key
+if [ ! -f "$keyname" ]; then
+    ssh-keygen -t rsa -f $keyname -C $remote_name -N '' -q
+fi
+
+#send the pub to github
+#echo "$(cat $keyname.pub)"
+gh api repos/:owner/:repo/keys -f key="$(cat $keyname.pub)" || exit 1
+#send the private to aws 
+create_secret -n $secret_name -f $keyname
+
+rm $keyname
+rm $keyname.pub

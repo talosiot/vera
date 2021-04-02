@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+help() {
+    echo "Store a grafana api key as an aws secret"
+    echo "-u url of the grafana instance this refers to e.g. dashboard.talosiot.com"
+    echo "-o org id of the grafana org for this key"
+    exit 1
+}
+
+url="dashboard.talosiot.com"
+while getopts ":o:u:" arg; do
+    case $arg in
+        u) url=$OPTARG;;
+        o) orgid=$OPTARG;;
+        *) help ;;
+    esac
+done
+
+[ -z "$url" ] && help
+[ -z "$orgid" ] && help
+
+secret_name="grafana/$url/org/$orgid"
+get_secret -n $secret_name

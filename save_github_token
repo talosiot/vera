@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+help() {
+    echo "Store your github personal access token as an aws secret"
+    echo "GITHUB_TOKEN environment variable must be set"
+    echo "-u github username"
+    exit 1
+}
+
+while getopts ":u:" arg; do
+    case $arg in
+        u) USER=$OPTARG;;
+        *) help ;;
+    esac
+done
+
+[ -z "$USER" ] && help
+[ -z "$GITHUB_TOKEN" ] && echo "Your GITHUB_TOKEN must be set" && exit 1
+
+NAME="$USER@github.com/token"
+aws secretsmanager create-secret --name $NAME --secret-string $GITHUB_TOKEN
