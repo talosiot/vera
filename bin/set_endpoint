@@ -1,0 +1,1 @@
+export AWS_ENDPOINT="--endpoint_url http://localhost:4566"

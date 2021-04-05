@@ -15,7 +15,8 @@ while getopts ":u:" arg; do
 done
 
 [ -z "$GITHUBUSER" ] && help
-[ -z "$VERA_HOME" ] && echo "Must source vera/sethome first" && exit 1
+
+which get_secret || { echo "Must add vera to path"; exit 1; }
 
 SECRET_NAME="$GITHUBUSER@github.com/token"
-echo $($VERA_HOME/get -n $SECRET_NAME)
+get_secret -n $SECRET_NAME

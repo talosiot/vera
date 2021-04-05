@@ -7,6 +7,13 @@ help() {
     exit 1
 }
 
+vera_check() {
+    echo "Must add vera to path"
+    exit 1
+}
+
+which create_secret || vera_check
+
 while getopts ":u:" arg; do
     case $arg in
         u) USER=$OPTARG;;
@@ -18,4 +25,4 @@ done
 [ -z "$GITHUB_TOKEN" ] && echo "Your GITHUB_TOKEN must be set" && exit 1
 
 NAME="$USER@github.com/token"
-aws secretsmanager create-secret --name $NAME --secret-string $GITHUB_TOKEN
+create_secret -n $NAME -s $GITHUB_TOKEN

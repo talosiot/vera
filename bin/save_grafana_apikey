@@ -8,6 +8,8 @@ help() {
     exit 1
 }
 
+which create_secret || (echo "Must add vera to path" && exit 1)
+
 while getopts ":k:o:u:" arg; do
     case $arg in
         u) url=$OPTARG;;
@@ -22,4 +24,4 @@ done
 [ -z "$orgid" ] && help
 
 secret_name="grafana/$url/org/$orgid"
-aws secretsmanager create-secret --name $secret_name --secret-string $key
+create_secret -n $secret_name -s $key

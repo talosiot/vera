@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 
-keyname="__new_deploykey"
 
 remote_name=$(git remote get-url origin)
 #aws secret names cant have colon
 secret_name=$(echo "$remote_name" | sed 's/:/\//g')
 
-[ -z "$VERA_HOME" ] && echo "Must source vera/sethome first" && exit 1
+which get_secret || { echo "Must add vera to path"; exit 1; }
 
-$VERA_HOME/get -n $secret_name
+get_secret -n $secret_name
