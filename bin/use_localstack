@@ -1,0 +1,2 @@
+docker run --rm -d -p 4566:4566 --name localstack localstack/localstack
+export AWS_ENDPOINT="--endpoint-url http://localhost:4566"
