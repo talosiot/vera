@@ -2,9 +2,17 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {}
+index = {"create": "userpass.ipynb",
+         "update": "userpass.ipynb",
+         "get": "userpass.ipynb",
+         "delete": "userpass.ipynb",
+         "CLIENT": "secret.ipynb",
+         "dump": "userpass.ipynb",
+         "load": "userpass.ipynb"}
 
-modules = []
+modules = ["grafanakey.py",
+           "secret.py",
+           "userpass.py"]
 
 doc_url = "https://talosiot.github.io/vera/"
 
