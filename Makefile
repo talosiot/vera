@@ -18,7 +18,7 @@ clean:
 	rm -rf dist
 
 github:
-	act -s AWS_DEFAULT_REGION -P ubuntu-latest=github_workflow_tester
+	act --env AWS_DEFAULT_REGION="us-west-1" -P ubuntu-latest=github_workflow_tester
 
 env:
 	virtualenv .venv -p python3.8 --prompt "[$(shell basename "`pwd`")] "
