@@ -4,7 +4,7 @@ __all__ = ['CLIENT', 'run_localstack', 'make_local_client', 'get', 'create', 'up
 
 # Cell
 import boto3
-CLIENT = session.client('secretsmanager')
+CLIENT = boto3.client('secretsmanager')
 
 # Cell
 from scylla import run_container, set_port_name
