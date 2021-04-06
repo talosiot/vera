@@ -4,7 +4,7 @@ __all__ = ['CLIENT', 'run_localstack', 'make_local_client', 'get', 'create', 'up
 
 # Cell
 import boto3
-CLIENT = boto3.client('secretsmanager')
+CLIENT = session.client('secretsmanager')
 
 # Cell
 from scylla import run_container, set_port_name
@@ -14,6 +14,8 @@ def run_localstack(version="latest", **kwargs):
     env = {'SERVICES':'secretsmanager'}
     additional_kwargs = {'environment': env}
     additional_kwargs.update(kwargs)
+    #changing the port of localstack is hard and involves tinkering with the EDGE_PORT environment variable
+    #just leave it be
     ports = {4566:4566}
     image = 'localstack/localstack:{}'.format(version)
     ls_container = run_container(image, ports=ports, block_until_port_available=4566,
