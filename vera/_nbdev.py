@@ -2,15 +2,16 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"create": "userpass.ipynb",
-         "update": "userpass.ipynb",
-         "get": "userpass.ipynb",
-         "delete": "userpass.ipynb",
+index = {"create": "grafanakey.ipynb",
+         "update": "grafanakey.ipynb",
+         "get": "grafanakey.ipynb",
+         "delete": "grafanakey.ipynb",
          "CLIENT": "secret.ipynb",
          "run_localstack": "secret.ipynb",
          "make_local_client": "secret.ipynb",
          "dump": "userpass.ipynb",
-         "load": "userpass.ipynb"}
+         "load": "userpass.ipynb",
+         "name": "grafanakey.ipynb"}
 
 modules = ["grafanakey.py",
            "secret.py",

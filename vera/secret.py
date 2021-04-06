@@ -28,12 +28,17 @@ def make_local_client():
     return session.client('secretsmanager')
 
 # Cell
-def get(name, client=None, **kwargs):
+def get(name, client=None, fail_safely=False, **kwargs):
     '''
     Retrieves the secret with the given name
     '''
     client = client or CLIENT
-    resp = client.get_secret_value(SecretId=name, **kwargs)
+    try:
+        resp = client.get_secret_value(SecretId=name, **kwargs)
+    except client.exceptions.ResourceNotFoundException:
+        if fail_safely:
+            return None
+        raise
     str_value = resp.get('SecretString')
     byte_value = resp.get('SecretBytes')
     return str_value or byte_value
