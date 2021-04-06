@@ -28,3 +28,8 @@ aws secretsmanager delete-secret --secret-id git@github.com/...
 ### Grafana api keys
 
 The naming convention is `grafana/$url/org/$org_id` for example `grafana/dashboard.talosiot.com/org/12`.  
+
+
+## Testing with docker
+
+This library uses localstack for local testing of the aws component.  Localstack is not well set-up to change the port easily, and so we depend on the edge port of 4566.  For this reason, always run `--n_workers=1` for tests so that multiple localstack containers do not try to bind the same port at the same time.  This makes the tests slower.

@@ -8,7 +8,7 @@ it:
 	git status
 
 test:
-	. .venv/bin/activate && nbdev_test_nbs
+	. .venv/bin/activate && nbdev_test_nbs --n_workers 1
 
 readme:
 	. .venv/bin/activate && nbdev_build_docs
@@ -30,7 +30,7 @@ server:
 	. .venv/bin/activate && jupyter lab --ip 0.0.0.0
 
 keys:
-	which jq || (echo "Must have jq installed: sudo apt install -y jq" && exit 1)
+	which jq || (echo "Must have jq installed: sudo apt install -y jq" ; false)
 	mkdir -p __deploykeys
 	for key in $(shell grep '@git+ssh' settings.ini | sed -n -e 's/^.*\(@git+ssh:\/\/\)//p') ; do \
 		fname=__deploykeys/$$( basename $$key ).key && echo $$fname ; \
