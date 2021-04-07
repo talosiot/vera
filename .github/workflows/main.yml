@@ -13,6 +13,7 @@ jobs:
         architecture: 'x64'
     - name: Install the library
       run: |
+        pip install jupyter-client<=6.1.12
         pip install nbdev jupyter
         pip install -e .
     - name: Read all notebooks
