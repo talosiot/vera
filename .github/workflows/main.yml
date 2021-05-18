@@ -11,11 +11,7 @@ jobs:
       with:
         python-version: '3.8'
         architecture: 'x64'
-    - name: Clone nbdevCI
-      run: git clone https://github.com/talosiot-will/nbdevCI.git nbdevCI
-    - name: Install requirements
-      run: nbdevCI/install_requirements
-    - name: Run nbdevCI with a single worker to prevent localstack collisions
-      run: INPUT_NBDEV_TEST_NBS_ARGS="--n_workers=1" nbdevCI/entrypoint.sh
-    - name: Remove nbdevCI
-      run: rm -rf nbdevCI
+    - name: nbdevCI
+      uses: talosiot-will/nbdevCI@v1
+      with: 
+        nbdev_test_nbs_args: "--n_workers=1"
