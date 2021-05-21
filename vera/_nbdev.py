@@ -11,6 +11,7 @@ index = {"name": "grafanakey.ipynb",
          "CLIENT": "secret.ipynb",
          "run_localstack": "secret.ipynb",
          "make_local_client": "secret.ipynb",
+         "LazyLoader": "secret.ipynb",
          "dump": "userpass.ipynb",
          "load": "userpass.ipynb"}
 
